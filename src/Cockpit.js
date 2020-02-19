@@ -3,7 +3,7 @@ import useServer from "./server/useServer";
 import { getSpaceObjects } from "./server/api";
 
 export default function Cockpit({ engineMode, setEngineMode }) {
-  const [setCourse] = useServer("Defiant");
+  const [setCourse, currentPosition, getCourse] = useServer("Defiant");
   const [spaceObjects, setSpaceObjects] = useState([]);
   const [selectedSpaceObjectName, setSelectedSpaceObjectName] = useState();
   const [destinationX, setDestinationX] = useState();
@@ -17,6 +17,16 @@ export default function Cockpit({ engineMode, setEngineMode }) {
     }
     fetch();
   }, []);
+
+  useEffect(() => {
+    async function fetch() {
+      const result = await getCourse();
+      setDestinationX(result.destinationX);
+      setDestinationY(result.destinationY);
+      setSpeed(result.speed);
+    }
+    fetch();
+  }, [getCourse]);
 
   function handleSpaceObjectChanged(event) {
     // Determine the value of the selected item, which is the space object name.
@@ -118,7 +128,13 @@ export default function Cockpit({ engineMode, setEngineMode }) {
           </div>
         </form>
       </div>
-      <div className="locationPanel" />
+      <div className="locationPanel">
+        <div>
+          Pos: {currentPosition.x},{currentPosition.y}
+        </div>
+        <div>Loc.: {currentPosition.location}</div>
+        <div>Arrived: {currentPosition.destinationReached ? "Yes" : "No"}</div>
+      </div>
     </div>
   );
 }
