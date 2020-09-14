@@ -3,7 +3,7 @@ import useServer from "./server/useServer";
 import { getSpaceObjects } from "./server/api";
 
 export default function Cockpit({ engineMode, setEngineMode }) {
-  const [setCourse, currentPosition, getCourse] = useServer("Defiant");
+  const [setCourse, currentPosition, getCourse] = useServer("Minotuar");
   const [spaceObjects, setSpaceObjects] = useState([]);
   const [selectedSpaceObjectName, setSelectedSpaceObjectName] = useState();
   const [destinationX, setDestinationX] = useState();
@@ -38,7 +38,7 @@ export default function Cockpit({ engineMode, setEngineMode }) {
 
     // A space object was selected, find it in the spaceObjects array.
     const selectedSpaceObject = spaceObjects.find(
-      s => s.name === selectedSpaceObjectName
+      (s) => s.name === selectedSpaceObjectName
     );
 
     // Update the destination according to the selected space object's destination.
@@ -95,9 +95,10 @@ export default function Cockpit({ engineMode, setEngineMode }) {
           <select
             onChange={handleSpaceObjectChanged}
             value={selectedSpaceObjectName}
+            style={{ width: "196px" }}
           >
             <option key="-" value=""></option>
-            {spaceObjects.map(spaceObject => (
+            {spaceObjects.map((spaceObject) => (
               <option key={spaceObject.name} value={spaceObject.name}>
                 {spaceObject.name} ({spaceObject.type})
               </option>
@@ -109,19 +110,19 @@ export default function Cockpit({ engineMode, setEngineMode }) {
             type="text"
             placeholder="x"
             value={destinationX}
-            onChange={event => setDestinationX(event.target.value)}
+            onChange={(event) => setDestinationX(event.target.value)}
           />
           <input
             type="text"
             placeholder="y"
             value={destinationY}
-            onChange={event => setDestinationY(event.target.value)}
+            onChange={(event) => setDestinationY(event.target.value)}
           />
           <input
             type="text"
             placeholder="speed"
             value={speed}
-            onChange={event => setSpeed(event.target.value)}
+            onChange={(event) => setSpeed(event.target.value)}
           />
           <div>
             <button type="submit">Go</button>
