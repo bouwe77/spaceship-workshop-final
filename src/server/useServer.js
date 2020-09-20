@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import io from "socket.io-client";
 import { getSpaceship } from "./api";
 
-const useServer = spaceshipId => {
+const useServer = (spaceshipId) => {
   const [currentPosition, setCurrentPosition] = useState({});
   //const [messages, setMessages] = useState([]);
   const socketRef = useRef();
@@ -18,7 +18,7 @@ const useServer = spaceshipId => {
       destinationX: spaceship.destinationX,
       destinationY: spaceship.destinationY,
       speed: spaceship.speed,
-      location: spaceship.location
+      location: spaceship.location,
     };
   }, [spaceshipId]);
 
@@ -26,27 +26,27 @@ const useServer = spaceshipId => {
   useEffect(() => {
     try {
       socketRef.current = io("https://spaceship-socket-io.herokuapp.com", {
-        forceNew: true
+        forceNew: true,
       });
     } catch (error) {
       console.log("error", error);
       throw error;
     }
 
-    socketRef.current.emit("joinRoom", spaceshipId);
-    console.log(`${spaceshipId} joined the room`);
+    socketRef.current.emit("registerSpaceship", spaceshipId);
+    console.log(`${spaceshipId} successfully registered`);
 
     socketRef.current.on("disconnect", () => {
       console.log("disconnected...");
       socketRef.current.connect();
     });
 
-    socketRef.current.on("CurrentPositionUpdated", currentPosition => {
+    socketRef.current.on("CurrentPositionUpdated", (currentPosition) => {
       const pos = {
         x: currentPosition.position.x,
         y: currentPosition.position.y,
         location: currentPosition.location,
-        destinationReached: currentPosition.destinationReached
+        destinationReached: currentPosition.destinationReached,
       };
       console.log("currentPosition", pos);
       setCurrentPosition(pos);
