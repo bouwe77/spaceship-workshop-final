@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import useServer from "./server/useServer";
 import { getSpaceObjects } from "./server/api";
 
-export default function Cockpit({ engineMode, setEngineMode }) {
+export default function Cockpit() {
   const [setCourse, currentPosition, getCourse] = useServer("Minotuar");
+  const [engineMode, setEngineMode] = useState(IDLE);
   const [spaceObjects, setSpaceObjects] = useState([]);
   const [selectedSpaceObjectName, setSelectedSpaceObjectName] = useState();
   const [destinationX, setDestinationX] = useState();
@@ -58,7 +59,7 @@ export default function Cockpit({ engineMode, setEngineMode }) {
   return (
     <div className="cockpit">
       <div className="engineModePanel">
-        <div>Engine mode:</div>
+        <div>ENGINE MODE</div>
         <div>
           <input
             type="radio"
@@ -89,8 +90,20 @@ export default function Cockpit({ engineMode, setEngineMode }) {
           />
           <label htmlFor={IMPULSE}>Impulse</label>
         </div>
+        <div className="speedPanel">
+          <form onSubmit={go}>
+            <input
+              type="text"
+              placeholder="speed"
+              value={speed}
+              onChange={(event) => setSpeed(event.target.value)}
+            />
+            <button type="submit">Go</button>
+          </form>
+        </div>
       </div>
       <div className="navigationPanel">
+        NAVIGATION
         <div>
           <select
             onChange={handleSpaceObjectChanged}
@@ -105,35 +118,27 @@ export default function Cockpit({ engineMode, setEngineMode }) {
             ))}
           </select>
         </div>
-        <form onSubmit={go}>
-          <input
-            type="text"
-            placeholder="x"
-            value={destinationX}
-            onChange={(event) => setDestinationX(event.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="y"
-            value={destinationY}
-            onChange={(event) => setDestinationY(event.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="speed"
-            value={speed}
-            onChange={(event) => setSpeed(event.target.value)}
-          />
-          <div>
-            <button type="submit">Go</button>
-          </div>
-        </form>
+        X:{" "}
+        <input
+          type="text"
+          placeholder="x"
+          value={destinationX}
+          onChange={(event) => setDestinationX(event.target.value)}
+        />
+        Y:{" "}
+        <input
+          type="text"
+          placeholder="y"
+          value={destinationY}
+          onChange={(event) => setDestinationY(event.target.value)}
+        />
       </div>
       <div className="locationPanel">
+        LOCATION
         <div>
           Pos: {currentPosition.x},{currentPosition.y}
         </div>
-        <div>Loc.: {currentPosition.location}</div>
+        <div>Loc.: {currentPosition.location || "..."}</div>
         <div>Arrived: {currentPosition.destinationReached ? "Yes" : "No"}</div>
       </div>
     </div>

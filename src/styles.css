@@ -2,41 +2,12 @@ body {
   font-family: monospace;
 }
 
-.engine {
-  background-image: url("https://spaceship-workshop.netlify.com/engine.png");
-  width: 700px;
-  height: 468px;
-  position: relative;
-  margin: 10px;
-}
-
-.engineMonitor {
-  position: absolute;
-  background-color: Black;
-  width: 89px;
-  height: 43px;
-  left: 303px;
-  top: 306px;
-  padding: 2px;
-  font-family: monospace;
-  color: White;
-  text-transform: uppercase;
-  font-size: 12px;
-}
-
-.engineMonitor h1 {
-  color: Green;
-  display: inline;
-  text-transform: uppercase;
-  font-size: 12px;
-}
-
 .cockpit {
   background-image: url("https://spaceship-workshop.netlify.com/cockpit.png");
   width: 700px;
   height: 468px;
   position: relative;
-  margin: 10px;
+  margin: 10px 0px;
 }
 
 .engineModePanel {
@@ -94,7 +65,7 @@ input[type="radio"]:checked:after {
   border: 1px solid lightblue;
 }
 
-.navigationPanel input {
+input[type="text"] {
   width: 30px;
   margin-right: 10px;
 }
@@ -104,7 +75,7 @@ input[type="radio"]:checked:after {
   display: inline-block;
 }
 
-.navigationPanel button {
+button {
   width: 50px;
   height: 30px;
   text-transform: uppercase;

@@ -22,6 +22,24 @@ const useServer = (spaceshipId) => {
     };
   }, [spaceshipId]);
 
+  // Fetch the currentPosition when the component initially renders.
+  useEffect(() => {
+    async function fetch() {
+      const spaceship = await getSpaceship(spaceshipId);
+      const pos = {
+        x: spaceship.positionX,
+        y: spaceship.positionY,
+        location: spaceship.location,
+        destinationReached:
+          spaceship.positionX === spaceship.destinationX &&
+          spaceship.positionY === spaceship.destinationY,
+      };
+      console.log("currentPosition", pos);
+      setCurrentPosition(pos);
+    }
+    fetch();
+  }, [spaceshipId]);
+
   // Connect to the socket server when the spaceshipId changes.
   useEffect(() => {
     try {

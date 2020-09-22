@@ -1,15 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import Cockpit from "./Cockpit";
-import Engine from "./Engine";
+import Footer from "./Footer";
 
 export default function Spaceship() {
-  const [engineMode, setEngineMode] = useState("idle");
-
   return (
     <div>
       <h1>My Spaceship!</h1>
-      <Cockpit engineMode={engineMode} setEngineMode={setEngineMode} />
-      <Engine engineMode={engineMode} />
+      <Cockpit />
+      <Footer />
     </div>
   );
 }
