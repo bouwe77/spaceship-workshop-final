@@ -1,13 +1,13 @@
 import React from "react";
 import Cockpit from "./Cockpit";
-import Footer from "./Footer";
 
 export default function Spaceship() {
+  const spaceshipId = "Minotuar";
+
   return (
     <div>
-      <h1>My Spaceship!</h1>
-      <Cockpit />
-      <Footer />
+      <h1>{spaceshipId}</h1>
+      <Cockpit spaceshipId={spaceshipId} />
     </div>
   );
 }

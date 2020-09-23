@@ -2,8 +2,12 @@ import React, { useState, useEffect } from "react";
 import useServer from "./server/useServer";
 import { getSpaceObjects } from "./server/api";
 
-export default function Cockpit() {
-  const [setCourse, currentPosition, getCourse] = useServer("Minotuar");
+const IDLE = "idle";
+const THRUSTERS = "thrusters";
+const IMPULSE = "impulse";
+
+export default function Cockpit({ spaceshipId }) {
+  const [setCourse, currentPosition, getCourse] = useServer(spaceshipId);
   const [engineMode, setEngineMode] = useState(IDLE);
   const [spaceObjects, setSpaceObjects] = useState([]);
   const [selectedSpaceObjectName, setSelectedSpaceObjectName] = useState();
@@ -46,10 +50,6 @@ export default function Cockpit() {
     setDestinationX(selectedSpaceObject.destinationX);
     setDestinationY(selectedSpaceObject.destinationY);
   }
-
-  const IDLE = "idle";
-  const THRUSTERS = "thrusters";
-  const IMPULSE = "impulse";
 
   function go(event) {
     event.preventDefault();

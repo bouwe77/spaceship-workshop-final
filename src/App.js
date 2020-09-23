@@ -1,7 +1,12 @@
 import React from "react";
-
 import Spaceship from "./Spaceship";
+import Footer from "./Footer";
 
 export default function App() {
-  return <Spaceship />;
+  return (
+    <div>
+      <Spaceship />
+      <Footer />
+    </div>
+  );
 }
