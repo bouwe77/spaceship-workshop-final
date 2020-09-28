@@ -2,7 +2,7 @@ import React from "react";
 import Cockpit from "./Cockpit";
 
 export default function Spaceship() {
-  const spaceshipId = "Minotuar";
+  const spaceshipId = "Terigon";
 
   return (
     <div>

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "https://spaceship-rest-api.herokuapp.com";
+const url = "https://spaceship-server.herokuapp.com";
 const urlSpaceships = `${url}/spaceships`;
 const urlSpaceObjects = `${url}/spaceobjects`;
 
@@ -24,7 +24,9 @@ export async function getSpaceship(spaceshipId) {
 
 export async function getDefaultSpaceships() {
   const spaceships = await getSpaceships();
-  const defaultSpaceships = spaceships.filter(spaceship => spaceship.isDefault);
+  const defaultSpaceships = spaceships.filter(
+    (spaceship) => spaceship.isDefault
+  );
   return defaultSpaceships;
 }
 
@@ -42,7 +44,8 @@ export async function getSpaceObjects() {
 
 function handle(error) {
   console.log(error);
-  if (error.response) console.log(error.response.status, error.response.data.Message);
+  if (error.response)
+    console.log(error.response.status, error.response.data.Message);
   if (error.config) console.log(error.config.url, error.config.method);
 
   throw error;

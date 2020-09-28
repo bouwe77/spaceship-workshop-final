@@ -43,7 +43,7 @@ const useServer = (spaceshipId) => {
   // Connect to the socket server when the spaceshipId changes.
   useEffect(() => {
     try {
-      socketRef.current = io("https://spaceship-socket-io.herokuapp.com", {
+      socketRef.current = io("https://spaceship-server.herokuapp.com", {
         forceNew: true,
       });
     } catch (error) {
