@@ -46,6 +46,9 @@ const useServer = (spaceshipId) => {
       socketRef.current = io("https://spaceship-server.herokuapp.com", {
         forceNew: true,
       });
+      // socketRef.current = io("http://localhost:55667", {
+      //   forceNew: true,
+      // });
     } catch (error) {
       console.log("error", error);
       throw error;

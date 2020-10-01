@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const url = "https://spaceship-server.herokuapp.com";
+//const url = "http://localhost:55667";
 const urlSpaceships = `${url}/spaceships`;
 const urlSpaceObjects = `${url}/spaceobjects`;
 
